@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Library.Data.BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Library.Test
@@ -9,6 +9,9 @@ namespace Library.Test
         [TestMethod]
         public void TestMethod1()
         {
+            BooksBl.BooksRemove(new[] { 13, 14 });
+
+
             //TODO TDD development?
             Assert.AreEqual(true, true);
         }

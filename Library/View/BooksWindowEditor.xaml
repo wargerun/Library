@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library.View"
-        mc:Ignorable="d" Loaded="BooksWindowEditor_OnLoaded"         Closed="BooksWindowEditor_OnClosed"
+        mc:Ignorable="d" Loaded="BooksWindowEditor_OnLoaded"         
         Title="Редактор" MaxHeight="530" Width="577.211" Background="#FF47230C" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>

@@ -19,29 +19,8 @@ namespace Library.View
         {
             BooksWindow booksWindow = new BooksWindow();
 
-            booksWindow.busyIndicator.IsBusy = true;
-            ThreadPool.QueueUserWorkItem( obj =>
-            {
-                try
-                {
-
-                    booksWindow.Books = BooksBl.GetBooks();//TODO Need Async
-
-                    this.GuiSync(() => 
-                    {
-                        booksWindow.Show();
-                        Close();
-                    });
-                }
-                catch (Exception ex)
-                {
-                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-                finally
-                {
-                    this.GuiSync(() => booksWindow.busyIndicator.IsBusy = false);
-                }
-            });
+            booksWindow.Show();
+            Close();
         }
 
         private void BtnShowWindowViewers_Click(object sender, RoutedEventArgs e)

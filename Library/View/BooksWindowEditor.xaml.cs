@@ -37,68 +37,113 @@ namespace Library.View
 
         private void BtnAddedBook_OnClick(object sender, RoutedEventArgs e)
         {
-            BOOKS book = GetWindowFields();
-
-            ThreadPool.QueueUserWorkItem(obj =>
+            try
             {
-                try
-                {
-                    BooksBl.AddNewCard(book);
+                BOOKS book = GetWindowFields();
 
-                    this.GuiSync(() =>
+                ThreadPool.QueueUserWorkItem(obj =>
+                {
+                    try
                     {
-                        Close();
-                    });
-                }
-                catch (DbEntityValidationException validationError)
-                {
-                    string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+                        BooksBl.AddNewCard(book);
 
-                    this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-                catch (Exception ex)
-                {
-                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-            });
-        }
+                        this.GuiSync(() =>
+                        {
+                            DialogResult = true;
 
-        
+                            Close();
+                        });
+                    }
+                    catch (DbEntityValidationException validationError)
+                    {
+                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+
+                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        } 
 
         private void BtnChangeBook_OnClick(object sender, RoutedEventArgs e)
         {
-            BOOKS book = GetWindowFields();
-
-            ThreadPool.QueueUserWorkItem(obj =>
+            try
             {
-                try
-                {
-                    BooksBl.UpdateBook(book);
+                BOOKS book = GetWindowFields();
 
-                    this.GuiSync(() =>
+                ThreadPool.QueueUserWorkItem(obj =>
+                {
+                    try
                     {
-                        DialogResult = true;
+                        BooksBl.UpdateBook(book);
 
-                        Close();
-                    });
-                }
-                catch (DbEntityValidationException validationError)
-                {
-                    string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+                        this.GuiSync(() =>
+                        {
+                            DialogResult = true;
 
-                    this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-                catch (Exception ex)
-                {
-                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-            });
+                            Close();
+                        });
+                    }
+                    catch (DbEntityValidationException validationError)
+                    {
+                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+
+                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void BtnRemoveBook_OnClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                BOOKS book = GetWindowFields();
 
-            throw new NotImplementedException();
+                ThreadPool.QueueUserWorkItem(obj =>
+                {
+                    try
+                    {
+                        BooksBl.BooksRemove(new[] { book.ID });  
+
+                        this.GuiSync(() =>
+                        {
+                            DialogResult = true;
+
+                            Close();
+                        });
+                    }
+                    catch (DbEntityValidationException validationError)
+                    {
+                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+
+                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                    catch (Exception ex)
+                    {
+                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
         
         private void BooksWindowEditor_OnLoaded(object sender, RoutedEventArgs e)
@@ -118,7 +163,7 @@ namespace Library.View
         {
             BOOKS book = new BOOKS
             {
-                ID = SelectedBook.ID,
+                ID = SelectedBook?.ID ?? 0,
                 ISBN = txtIsbn.Text,
                 NAME = txtName.Text,
                 PRICE = string.IsNullOrWhiteSpace(txtPrice.Text) ? 0 : decimal.Parse(txtPrice.Text),
@@ -128,6 +173,12 @@ namespace Library.View
                 STATUS = txtStatus.Text,
                 DESCRIPTION = txtDescription.Text
             };
+
+            if (book.COUNT < 0 )
+                throw new Exception($"Кол-во не может быть отрицательное!");
+
+            if (book.PRICE < 0)
+                throw new Exception($"Цена не может быть отрицательное!");  
 
             return book;
         }
@@ -142,24 +193,6 @@ namespace Library.View
             txtCount.Text = SelectedBook.COUNT.ToString();
             txtStatus.Text = SelectedBook.STATUS;
             txtDescription.Text = SelectedBook.DESCRIPTION;
-        }
-
-        //TODO Сделать обновление после закрытие формы и дописать удаление записи
-        private void BooksWindowEditor_OnClosed(object sender, EventArgs e)
-        {
-            BooksWindow booksWindow = new BooksWindow();
-
-            ThreadPool.QueueUserWorkItem(obj =>
-            {
-                try
-                {
-                    booksWindow.Books = BooksBl.GetBooks();//TODO Need Async
-                }
-                catch (Exception ex)
-                {
-                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                }
-            });
         }
     }
 }

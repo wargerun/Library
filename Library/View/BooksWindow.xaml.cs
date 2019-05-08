@@ -12,6 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library.Data.BusinessLogic;
 using Image = System.Drawing.Image;
 
 namespace Library.View
@@ -36,13 +37,17 @@ namespace Library.View
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            dgBooks.ItemsSource = Books;
-        }
+            RefreshBooks();
+        }    
 
         private void BtnAddbook_Click(object sender, RoutedEventArgs e)
         {
             BooksWindowEditor bookEditor = new BooksWindowEditor();
-            bookEditor.ShowDialog();
+
+            if (!bookEditor.ShowDialog().Value)
+                return;
+
+            RefreshBooks();
         }
 
         private void BtnEditBook_Click(object sender, RoutedEventArgs e)
@@ -58,14 +63,27 @@ namespace Library.View
             if (!bookEditor.ShowDialog().Value)
                 return;
 
-            //TODO Сделать обновление после закрытие формы и дописать удаление записи
-            dgBooks.ItemsSource = null;
-            dgBooks.ItemsSource = Books;       
+            RefreshBooks();     
         }
 
-        private void BtnRemoveBook_Click(object sender, RoutedEventArgs e)
+        private void RefreshBooks()
         {
+            ThreadPool.QueueUserWorkItem(obj =>
+            {
+                try
+                {
 
+                    this.GuiSync(() =>
+                    {
+                        dgBooks.ItemsSource = null;
+                        dgBooks.ItemsSource = Books = BooksBl.GetBooks();
+                    });
+                }
+                catch (Exception ex)
+                {
+                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                }
+            });
         }
     }
 }

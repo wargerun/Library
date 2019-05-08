@@ -59,5 +59,24 @@ namespace Library.Data.BusinessLogic
                 }
             }
         }
+
+        public static void BooksRemove(int[] booksId, LibraryDb dbContext = null)
+        {
+            using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
+            {
+                using (TransactionScope transaction = new TransactionScope())
+                {
+                    foreach (int id in booksId)
+                    {
+                        BOOKS book = db.BOOKS.SingleOrDefault(b => b.ID == id);
+                        db.BOOKS.Remove(book);
+                    }
+
+                    db.SaveChanges();
+
+                    transaction.Complete();
+                }
+            }
+        }
     }
 }
