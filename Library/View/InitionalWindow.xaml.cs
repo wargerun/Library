@@ -1,7 +1,4 @@
-﻿using System;
-using Library.Data.BusinessLogic;
-using System.Threading;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Library.View
 {
@@ -17,9 +14,8 @@ namespace Library.View
 
         private void BtnShowWindowBooks_Click(object sender, RoutedEventArgs e)
         {
-            BooksWindow booksWindow = new BooksWindow();
+            new BooksWindow().Show();
 
-            booksWindow.Show();
             Close();
         }
 

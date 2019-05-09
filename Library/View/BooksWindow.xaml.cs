@@ -1,19 +1,8 @@
 ﻿using Library.Data;
+using Library.Data.BusinessLogic;   
 using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Library.Data.BusinessLogic;
-using Image = System.Drawing.Image;
 
 namespace Library.View
 {
@@ -26,8 +15,6 @@ namespace Library.View
         {
             InitializeComponent();
         }
-
-        public IEnumerable<BOOKS> Books { private get; set; }
 
         private void Window_Closed(object sender, EventArgs e)
         {
@@ -71,12 +58,11 @@ namespace Library.View
             ThreadPool.QueueUserWorkItem(obj =>
             {
                 try
-                {
-
+                {        
                     this.GuiSync(() =>
                     {
                         dgBooks.ItemsSource = null;
-                        dgBooks.ItemsSource = Books = BooksBl.GetBooks();
+                        dgBooks.ItemsSource = BooksBl.GetBooks();
                     });
                 }
                 catch (Exception ex)
