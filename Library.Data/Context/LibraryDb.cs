@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Data.Common;
+using System.Data.Entity;
 
 namespace Library.Data.Context
 {
@@ -6,6 +7,11 @@ namespace Library.Data.Context
     {
         public LibraryDb() : base("DbConnection")
         {
+        }
+
+        protected LibraryDb(DbConnection connection) : base(connection, true)
+        {
+
         }
 
         public static LibraryDb GetDbContext(LibraryDb dbContext = null)
