@@ -17,7 +17,7 @@ namespace Library
                 }
             }
 
-            return string.Join("\n", errors);
+            return string.Join(",\n", errors);
         }
     }
 }
