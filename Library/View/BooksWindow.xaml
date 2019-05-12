@@ -19,19 +19,18 @@
         </Style>
     </Window.Resources>
 
-    <xctk:BusyIndicator Name="busyIndicator" BusyContent="Ведутся работы...">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-            <StackPanel Grid.Row="0" Orientation="Horizontal" Height="auto" HorizontalAlignment="Center" Margin="5">
-                <Button Margin="5" Name="btnAddbook" Content="Добавить" Click="BtnAddbook_Click"/>
-                <Button Margin="5" Name="btnEditBook" Content="Изменить/Удалить" Click="BtnEditBook_Click"/>
-            </StackPanel>
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Height="auto" HorizontalAlignment="Center" Margin="5">
+            <Button Margin="5" Name="btnAddbook" Content="Добавить" Click="BtnAddbook_Click"/>
+            <Button Margin="5" Name="btnEditBook" Content="Изменить/Удалить" Click="BtnEditBook_Click"/>
+        </StackPanel>
 
-            <DataGrid Grid.Row="1" Name="dgBooks"
+        <DataGrid Grid.Row="1" Name="dgBooks"
                   ScrollViewer.CanContentScroll="False"
                   EnableRowVirtualization="True"
                   EnableColumnVirtualization="True"
@@ -44,96 +43,95 @@
                   AutoGenerateColumns="False" 
                   MouseDoubleClick="BtnEditBook_Click">
 
-                <DataGrid.Resources>
-                    <Style TargetType="{x:Type TextBox}">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="TextWrapping" Value="Wrap" />
-                        <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="IsReadOnly" Value="True" />
-                    </Style>
-                </DataGrid.Resources>
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBox}">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="TextWrapping" Value="Wrap" />
+                    <Setter Property="BorderThickness" Value="0" />
+                    <Setter Property="IsReadOnly" Value="True" />
+                </Style>
+            </DataGrid.Resources>
 
-                <DataGrid.Style>
-                    <Style>
-                        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
-                        <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
-                    </Style>
-                </DataGrid.Style>
+            <DataGrid.Style>
+                <Style>
+                    <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+                    <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling"/>
+                </Style>
+            </DataGrid.Style>
 
-                <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="ID" Visibility="Hidden">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding ID}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="ID" Visibility="Hidden">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding ID}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="ISBN">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding ISBN}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="ISBN">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding ISBN}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Название">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding NAME}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Название">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding NAME}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Автор">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding AUTHOR}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Автор">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding AUTHOR}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Издатель">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding PUBLISHING}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Издатель">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding PUBLISHING}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Кол-во">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding COUNT}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Кол-во">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding COUNT}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Статус">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding STATUS}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Статус">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding STATUS}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Цена">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding PRICE}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Цена">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding PRICE}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Описание" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding DESCRIPTION}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-    </xctk:BusyIndicator>
+                <DataGridTemplateColumn Header="Описание" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding DESCRIPTION}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
 </Window>

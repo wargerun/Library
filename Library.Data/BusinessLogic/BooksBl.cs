@@ -69,7 +69,9 @@ namespace Library.Data.BusinessLogic
                     foreach (int id in booksId)
                     {
                         BOOKS book = db.BOOKS.SingleOrDefault(b => b.ID == id);
-                        db.BOOKS.Remove(book);
+
+                        if (book != null)
+                            db.BOOKS.Remove(book);
                     }
 
                     db.SaveChanges();
