@@ -22,7 +22,8 @@ namespace Library.Data.Context
             return dbContext ?? new LibraryDb();
         }
 
-        // TODO Узнать ПОЧЕМУ СОЗДАЕТСЯ ТАБЛИЦА VIEWERs сукаааааааааааааа!!!=( 
+        // TODO Узнать ПОЧЕМУ СОЗДАЕТСЯ ТАБЛИЦА VIEWERs сукаааааааааааааа!!!=( https://ru.stackoverflow.com/questions/319630/entity-framework-обновить-только-одну-сущностьтаблицу
+        jebaited                                          
         // TODO Настроить правильно связи
 
         public virtual DbSet<BOOKS> BOOKS { get; set; }
