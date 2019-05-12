@@ -1,10 +1,7 @@
-﻿using Library.Data.Context;
+﻿using Library.Data.Context; 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Transactions;
 
 namespace Library.Data.BusinessLogic
@@ -60,7 +57,7 @@ namespace Library.Data.BusinessLogic
             }
         }
 
-        public static void BooksRemove(int[] booksId, LibraryDb dbContext = null)
+        public static void BooksRemove(decimal[] booksId, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {

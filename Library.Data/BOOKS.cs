@@ -8,10 +8,9 @@ namespace Library.Data
         public BOOKS()
         {
             this.COUNT = 0;
-            this.BOOKS_ISSUED = new HashSet<BOOKS_ISSUED>();
         }
 
-        public int ID { get; set; }
+        public decimal ID { get; set; }
 
         [Required]
         public string ISBN { get; set; }
@@ -20,13 +19,13 @@ namespace Library.Data
         public string AUTHOR { get; set; }
         public string PUBLISHING { get; set; }
 
-        public int? COUNT { get; set; }
+        public decimal? COUNT { get; set; }
         public string STATUS { get; set; }
         public string DESCRIPTION { get; set; }
 
         [Required]
         public decimal PRICE { get; set; }
 
-        public ICollection<BOOKS_ISSUED> BOOKS_ISSUED { get; set; }
+        public virtual ICollection<BOOKS_ISSUED> BOOKS_ISSUED { get; set; }
     }
 }
