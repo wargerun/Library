@@ -15,8 +15,7 @@ namespace TestApp
             {
                 db.Database.Initialize(true);
                 var book = db.BOOKS.ToList();
-                var viewersve = db.VIEWER.ToList();
-
+                var viewersve = db.VIEWERS.ToList();    
             }
         }
     }

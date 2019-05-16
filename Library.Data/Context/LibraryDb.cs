@@ -8,8 +8,10 @@ namespace Library.Data.Context
         public LibraryDb() : base("LibraryDb")
         {
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<LibraryDb>());
-            //Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDb>());
-            Database.SetInitializer(new DropCreateDatabaseAlways<LibraryDb>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<LibraryDb>());
+
+            
+            //Database.SetInitializer(new DropCreateDatabaseAlways<LibraryDb>());//при создание бд
         }
 
         protected LibraryDb(DbConnection connection) : base(connection, true)
@@ -21,13 +23,9 @@ namespace Library.Data.Context
         {
             return dbContext ?? new LibraryDb();
         }
-
-        // TODO Узнать ПОЧЕМУ СОЗДАЕТСЯ ТАБЛИЦА VIEWERs сукаааааааааааааа!!!=( https://ru.stackoverflow.com/questions/319630/entity-framework-обновить-только-одну-сущностьтаблицу
-        jebaited                                          
-        // TODO Настроить правильно связи
-
-        public virtual DbSet<BOOKS> BOOKS { get; set; }
-        public virtual DbSet<VIEWER> VIEWER { get; set; }
+                                    
+        public virtual DbSet<BOOK> BOOKS { get; set; }
+        public virtual DbSet<VIEWER> VIEWERS { get; set; }
         public virtual DbSet<BOOKS_ISSUED> BOOKS_ISSUED { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

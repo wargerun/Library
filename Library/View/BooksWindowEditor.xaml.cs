@@ -19,7 +19,7 @@ namespace Library.View
         }
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();  
-        public BOOKS SelectedBook { private get; set; }
+        public BOOK SelectedBook { private get; set; }
 
         private void BtnAddedBook_OnClick(object sender, RoutedEventArgs e)
         {
@@ -27,7 +27,7 @@ namespace Library.View
             {
                 _logger.Info("Getting started: BtnAddedBook_OnClick");
 
-                BOOKS book = GetWindowFields();
+                BOOK book = GetWindowFields();
 
                 PrepareThisAction(() => BooksBl.AddNewCard(book));
             }
@@ -43,7 +43,7 @@ namespace Library.View
             try
             {
                 _logger.Info("Getting started: BtnChangeBook_OnClick");
-                BOOKS book = GetWindowFields();
+                BOOK book = GetWindowFields();
 
                 PrepareThisAction(() => BooksBl.UpdateBook(book));
             }
@@ -59,7 +59,7 @@ namespace Library.View
             try
             {
                 _logger.Info("Getting started: BtnRemoveBook_OnClick");
-                BOOKS book = GetWindowFields();
+                BOOK book = GetWindowFields();
                    
                 PrepareThisAction(() => BooksBl.BooksRemove(new[] { book.ID }));
             }
@@ -115,9 +115,9 @@ namespace Library.View
             SetWindowField();
         }
 
-        private BOOKS GetWindowFields()
+        private BOOK GetWindowFields()
         {
-            BOOKS book = new BOOKS
+            BOOK book = new BOOK
             {
                 ID = SelectedBook?.ID ?? 0,
                 ISBN = txtIsbn.Text,

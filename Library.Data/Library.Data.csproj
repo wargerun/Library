@@ -67,7 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BOOKS.cs" />
+    <Compile Include="BOOK.cs" />
     <Compile Include="BOOKS_ISSUED.cs" />
     <Compile Include="BusinessLogic\BooksBl.cs" />
     <Compile Include="BusinessLogic\ViewerBl.cs" />

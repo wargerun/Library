@@ -8,13 +8,13 @@ namespace Library.Data.BusinessLogic
 {
     public static class BooksBl
     {
-        public static IEnumerable<BOOKS> GetBooks(LibraryDb dbContext = null)
+        public static IEnumerable<BOOK> GetBooks(LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
                 return db.BOOKS.ToList();
         }
 
-        public static void AddNewCard(BOOKS book, LibraryDb dbContext = null)
+        public static void AddNewCard(BOOK book, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {
@@ -29,7 +29,7 @@ namespace Library.Data.BusinessLogic
             }
         }
 
-        public static void UpdateBook(BOOKS book, LibraryDb dbContext = null)
+        public static void UpdateBook(BOOK book, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {
@@ -38,7 +38,7 @@ namespace Library.Data.BusinessLogic
                     if (book == null)
                         throw new ArgumentNullException($"book: {nameof(book)}");
 
-                    BOOKS dbBook = db.BOOKS.SingleOrDefault(b => b.ID == book.ID);
+                    BOOK dbBook = db.BOOKS.SingleOrDefault(b => b.ID == book.ID);
                     if (dbBook == null)
                         throw new Exception($"Книга с {book.ID} не найдена!");
 
@@ -63,9 +63,9 @@ namespace Library.Data.BusinessLogic
             {
                 using (TransactionScope transaction = new TransactionScope())
                 {
-                    foreach (int id in booksId)
+                    foreach (decimal id in booksId)
                     {
-                        BOOKS book = db.BOOKS.SingleOrDefault(b => b.ID == id);
+                        BOOK book = db.BOOKS.SingleOrDefault(b => b.ID == id);
 
                         if (book != null)
                             db.BOOKS.Remove(book);

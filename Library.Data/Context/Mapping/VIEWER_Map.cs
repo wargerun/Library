@@ -26,11 +26,6 @@ namespace Library.Data.Context
             Property(d => d.PHONE).HasMaxLength(50).IsRequired().IsUnicode(false);
 
             Property(d => d.EMAIL).HasMaxLength(100).IsUnicode(false);
-
-            // Relationships
-            //HasRequired(b => b.BOOKS_ISSUED)
-            //    .WithMany(b => b.VIEWER)
-            //    .HasForeignKey(b => b.ID);
         }
     }
 }

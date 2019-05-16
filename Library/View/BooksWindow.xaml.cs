@@ -44,7 +44,7 @@ namespace Library.View
 
             BooksWindowEditor bookEditor = new BooksWindowEditor
             {
-                SelectedBook =((BOOKS)dgBooks.SelectedItems[0]) 
+                SelectedBook =((BOOK)dgBooks.SelectedItems[0]) 
             };
 
             if (!bookEditor.ShowDialog().Value)

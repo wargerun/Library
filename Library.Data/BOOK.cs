@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Library.Data
 {
-    public class BOOKS
+    public class BOOK
     {
-        public BOOKS()
+        public BOOK()
         {
             this.COUNT = 0;
         }

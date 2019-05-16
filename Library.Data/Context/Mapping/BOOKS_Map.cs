@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace Library.Data.Context
 {
-    internal class BOOKS_Map : EntityTypeConfiguration<BOOKS>
+    internal class BOOKS_Map : EntityTypeConfiguration<BOOK>
     {
         public BOOKS_Map()
         {
@@ -30,11 +30,6 @@ namespace Library.Data.Context
             Property(b => b.DESCRIPTION).IsMaxLength().IsUnicode(false);
 
             Property(b => b.PRICE).HasPrecision(18, 2).IsRequired();
-
-            //// Relationships
-            //HasRequired(b => b.BOOKS_ISSUED)
-            //    .WithMany(b => b.BOOKS)
-            //    .HasForeignKey(b => b.BOOKS_ISSUED_ID); 
         }   
     }
 }
