@@ -21,7 +21,9 @@ namespace Library.View
 
         private void BtnShowWindowViewers_Click(object sender, RoutedEventArgs e)
         {
+            new ViewersWindow().Show();
 
+            Close();
         }
 
         private void BtnShowWindowIssuedBooks_Click(object sender, RoutedEventArgs e)

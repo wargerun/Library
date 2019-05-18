@@ -98,6 +98,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View\ViewersWindow.xaml.cs">
+      <DependentUpon>ViewersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ViewersWindowEditor.xaml.cs">
+      <DependentUpon>ViewersWindowEditor.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\BooksWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -126,6 +132,14 @@
       <DependentUpon>InitionalWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ViewersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ViewersWindowEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

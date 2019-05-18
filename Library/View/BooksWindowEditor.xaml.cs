@@ -125,7 +125,7 @@ namespace Library.View
                 PRICE = string.IsNullOrWhiteSpace(txtPrice.Text) ? 0 : decimal.Parse(txtPrice.Text),
                 AUTHOR = txtAuthor.Text,
                 PUBLISHING = txtPublisher.Text,
-                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : int.Parse(txtCount.Text),
+                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : decimal.Parse(txtCount.Text),
                 STATUS = txtStatus.Text,
                 DESCRIPTION = txtDescription.Text
             };
