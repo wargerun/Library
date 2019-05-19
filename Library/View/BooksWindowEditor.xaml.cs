@@ -4,6 +4,7 @@ using System;
 using System.Data.Entity.Validation;
 using System.Threading;
 using System.Windows;
+using NLog;
 
 namespace Library.View
 {
@@ -16,42 +17,23 @@ namespace Library.View
         {
             InitializeComponent();
         }
-        
-        public BOOKS SelectedBook { private get; set; }
+
+        private static Logger _logger = LogManager.GetCurrentClassLogger();  
+        public BOOK SelectedBook { private get; set; }
 
         private void BtnAddedBook_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                BOOKS book = GetWindowFields();
+                _logger.Info("Getting started: BtnAddedBook_OnClick");
 
-                ThreadPool.QueueUserWorkItem(obj =>
-                {
-                    try
-                    {
-                        BooksBl.AddNewCard(book);
+                BOOK book = GetWindowFields();
 
-                        this.GuiSync(() =>
-                        {
-                            DialogResult = true;
-
-                            Close();
-                        });
-                    }
-                    catch (DbEntityValidationException validationError)
-                    {
-                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
-
-                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                    catch (Exception ex)
-                    {
-                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                });
+                PrepareThisAction(() => BooksBl.AddNewCard(book));
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         } 
@@ -60,76 +42,66 @@ namespace Library.View
         {
             try
             {
-                BOOKS book = GetWindowFields();
+                _logger.Info("Getting started: BtnChangeBook_OnClick");
+                BOOK book = GetWindowFields();
 
-                ThreadPool.QueueUserWorkItem(obj =>
-                {
-                    try
-                    {
-                        BooksBl.UpdateBook(book);
-
-                        this.GuiSync(() =>
-                        {
-                            DialogResult = true;
-
-                            Close();
-                        });
-                    }
-                    catch (DbEntityValidationException validationError)
-                    {
-                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
-
-                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                    catch (Exception ex)
-                    {
-                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                });
+                PrepareThisAction(() => BooksBl.UpdateBook(book));
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+        }    
 
         private void BtnRemoveBook_OnClick(object sender, RoutedEventArgs e)
         {
             try
             {
-                BOOKS book = GetWindowFields();
-
-                ThreadPool.QueueUserWorkItem(obj =>
-                {
-                    try
-                    {
-                        BooksBl.BooksRemove(new[] { book.ID });  
-
-                        this.GuiSync(() =>
-                        {
-                            DialogResult = true;
-
-                            Close();
-                        });
-                    }
-                    catch (DbEntityValidationException validationError)
-                    {
-                        string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
-
-                        this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                    catch (Exception ex)
-                    {
-                        this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
-                    }
-                });
+                _logger.Info("Getting started: BtnRemoveBook_OnClick");
+                BOOK book = GetWindowFields();
+                   
+                PrepareThisAction(() => BooksBl.BooksRemove(new[] { book.ID }));
             }
             catch (Exception ex)
             {
+                _logger.Error(ex);
                 MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-        
+
+        private void PrepareThisAction(Action bookAction)
+        {
+            ThreadPool.QueueUserWorkItem(obj =>
+            {
+                try
+                {
+                    _logger.Info("Getting started pre proccess database");
+                    bookAction();
+
+                    this.GuiSync(() =>
+                    {
+                        DialogResult = true;
+
+                        Close();
+                    });
+
+                    _logger.Info("End-to-end pre proccess database: seccess");  
+                }
+                catch (DbEntityValidationException validationError)
+                {
+                    string errorsLine = ValidationHelpers.GetValidationErrors(validationError);
+
+                    this.GuiSync(() => MessageBox.Show(errorsLine, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex);
+                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                }
+            });
+        }
+
         private void BooksWindowEditor_OnLoaded(object sender, RoutedEventArgs e)
         {
             if (SelectedBook == null)
@@ -143,9 +115,9 @@ namespace Library.View
             SetWindowField();
         }
 
-        private BOOKS GetWindowFields()
+        private BOOK GetWindowFields()
         {
-            BOOKS book = new BOOKS
+            BOOK book = new BOOK
             {
                 ID = SelectedBook?.ID ?? 0,
                 ISBN = txtIsbn.Text,
@@ -153,7 +125,7 @@ namespace Library.View
                 PRICE = string.IsNullOrWhiteSpace(txtPrice.Text) ? 0 : decimal.Parse(txtPrice.Text),
                 AUTHOR = txtAuthor.Text,
                 PUBLISHING = txtPublisher.Text,
-                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : int.Parse(txtCount.Text),
+                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : decimal.Parse(txtCount.Text),
                 STATUS = txtStatus.Text,
                 DESCRIPTION = txtDescription.Text
             };

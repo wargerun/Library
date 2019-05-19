@@ -1,23 +1,20 @@
-﻿using Library.Data.Context;
+﻿using Library.Data.Context; 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Transactions;
 
 namespace Library.Data.BusinessLogic
 {
     public static class BooksBl
     {
-        public static IEnumerable<BOOKS> GetBooks(LibraryDb dbContext = null)
+        public static IEnumerable<BOOK> GetBooks(LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
                 return db.BOOKS.ToList();
         }
 
-        public static void AddNewCard(BOOKS book, LibraryDb dbContext = null)
+        public static void AddNewCard(BOOK book, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {
@@ -32,7 +29,7 @@ namespace Library.Data.BusinessLogic
             }
         }
 
-        public static void UpdateBook(BOOKS book, LibraryDb dbContext = null)
+        public static void UpdateBook(BOOK book, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {
@@ -41,7 +38,7 @@ namespace Library.Data.BusinessLogic
                     if (book == null)
                         throw new ArgumentNullException($"book: {nameof(book)}");
 
-                    BOOKS dbBook = db.BOOKS.SingleOrDefault(b => b.ID == book.ID);
+                    BOOK dbBook = db.BOOKS.SingleOrDefault(b => b.ID == book.ID);
                     if (dbBook == null)
                         throw new Exception($"Книга с {book.ID} не найдена!");
 
@@ -60,16 +57,18 @@ namespace Library.Data.BusinessLogic
             }
         }
 
-        public static void BooksRemove(int[] booksId, LibraryDb dbContext = null)
+        public static void BooksRemove(decimal[] booksId, LibraryDb dbContext = null)
         {
             using (LibraryDb db = LibraryDb.GetDbContext(dbContext))
             {
                 using (TransactionScope transaction = new TransactionScope())
                 {
-                    foreach (int id in booksId)
+                    foreach (decimal id in booksId)
                     {
-                        BOOKS book = db.BOOKS.SingleOrDefault(b => b.ID == id);
-                        db.BOOKS.Remove(book);
+                        BOOK book = db.BOOKS.SingleOrDefault(b => b.ID == id);
+
+                        if (book != null)
+                            db.BOOKS.Remove(book);
                     }
 
                     db.SaveChanges();

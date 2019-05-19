@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Data", "Library.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.Test", "Library.Test\Library.Test.csproj", "{2AE0A016-7014-4152-B9B3-03CE228D2AE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,14 @@ Global
 		{2AE0A016-7014-4152-B9B3-03CE228D2AE0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2AE0A016-7014-4152-B9B3-03CE228D2AE0}.Release|x86.ActiveCfg = Release|x86
 		{2AE0A016-7014-4152-B9B3-03CE228D2AE0}.Release|x86.Build.0 = Release|x86
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Debug|x86.Build.0 = Debug|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{49EF8F43-28E0-4A3A-844F-E068BA5BFB9E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

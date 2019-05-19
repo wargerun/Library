@@ -1,6 +1,7 @@
 ﻿using Library.Data;
 using Library.Data.BusinessLogic;   
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 
@@ -44,7 +45,7 @@ namespace Library.View
 
             BooksWindowEditor bookEditor = new BooksWindowEditor
             {
-                SelectedBook =((BOOKS)dgBooks.SelectedItems[0]) 
+                SelectedBook =((BOOK)dgBooks.SelectedItems[0]) 
             };
 
             if (!bookEditor.ShowDialog().Value)
@@ -55,19 +56,21 @@ namespace Library.View
 
         private void RefreshBooks()
         {
-            ThreadPool.QueueUserWorkItem(obj =>
+            ThreadPool.QueueUserWorkItem( obj =>
             {
                 try
-                {        
+                {
+                    IEnumerable<BOOK> books = BooksBl.GetBooks();
+
                     this.GuiSync(() =>
                     {
                         dgBooks.ItemsSource = null;
-                        dgBooks.ItemsSource = BooksBl.GetBooks();
+                        dgBooks.ItemsSource = books;
                     });
                 }
                 catch (Exception ex)
                 {
-                    this.GuiSync(() => MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error));
+                    this.GuiSync(() => MessageBox.Show(ex.Message, "Не удалось обновить таблицу!", MessageBoxButton.OK, MessageBoxImage.Error));
                 }
             });
         }
