@@ -29,7 +29,7 @@ namespace Library.View
 
                 BOOK book = GetWindowFields();
 
-                PrepareThisAction(() => BooksBl.AddNewCard(book));
+                ActionWrapper(() => BooksBl.AddNewCard(book));
             }
             catch (Exception ex)
             {
@@ -45,7 +45,7 @@ namespace Library.View
                 _logger.Info("Getting started: BtnChangeBook_OnClick");
                 BOOK book = GetWindowFields();
 
-                PrepareThisAction(() => BooksBl.UpdateBook(book));
+                ActionWrapper(() => BooksBl.UpdateBook(book));
             }
             catch (Exception ex)
             {
@@ -61,7 +61,7 @@ namespace Library.View
                 _logger.Info("Getting started: BtnRemoveBook_OnClick");
                 BOOK book = GetWindowFields();
                    
-                PrepareThisAction(() => BooksBl.BooksRemove(new[] { book.ID }));
+                ActionWrapper(() => BooksBl.BooksRemove(new[] { book.ID }));
             }
             catch (Exception ex)
             {
@@ -70,14 +70,14 @@ namespace Library.View
             }
         }
 
-        private void PrepareThisAction(Action bookAction)
+        private void ActionWrapper(Action someAction)
         {
             ThreadPool.QueueUserWorkItem(obj =>
             {
                 try
                 {
                     _logger.Info("Getting started pre proccess database");
-                    bookAction();
+                    someAction();
 
                     this.GuiSync(() =>
                     {
@@ -125,7 +125,7 @@ namespace Library.View
                 PRICE = string.IsNullOrWhiteSpace(txtPrice.Text) ? 0 : decimal.Parse(txtPrice.Text),
                 AUTHOR = txtAuthor.Text,
                 PUBLISHING = txtPublisher.Text,
-                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : decimal.Parse(txtCount.Text),
+                COUNT = string.IsNullOrWhiteSpace(txtCount.Text) ? 0 : int.Parse(txtCount.Text),
                 STATUS = txtStatus.Text,
                 DESCRIPTION = txtDescription.Text
             };

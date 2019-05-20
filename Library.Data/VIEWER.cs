@@ -19,6 +19,7 @@ namespace Library.Data
         [Required]
         public string PHONE { get; set; }
 
+        [Required]
         public string EMAIL{ get; set; }
 
         public virtual ICollection<BOOKS_ISSUED> BOOKS_ISSUED { get; set; }

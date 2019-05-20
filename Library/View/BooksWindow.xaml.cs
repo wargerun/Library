@@ -19,8 +19,7 @@ namespace Library.View
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            InitionalWindow initwindow = new InitionalWindow();
-            initwindow.Show();
+            new InitionalWindow().Show();
         }
 
         private void Window_ContentRendered(object sender, EventArgs e)
@@ -60,12 +59,10 @@ namespace Library.View
             {
                 try
                 {
-                    IEnumerable<BOOK> books = BooksBl.GetBooks();
-
                     this.GuiSync(() =>
                     {
                         dgBooks.ItemsSource = null;
-                        dgBooks.ItemsSource = books;
+                        dgBooks.ItemsSource = BooksBl.GetBooks(); 
                     });
                 }
                 catch (Exception ex)

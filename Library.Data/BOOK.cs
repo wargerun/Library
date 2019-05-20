@@ -19,7 +19,7 @@ namespace Library.Data
         public string AUTHOR { get; set; }
         public string PUBLISHING { get; set; }
 
-        public decimal? COUNT { get; set; }
+        public int? COUNT { get; set; }
         public string STATUS { get; set; }
         public string DESCRIPTION { get; set; }
 
