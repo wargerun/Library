@@ -28,11 +28,10 @@ namespace Library.View
             {
                 try
                 {
-                    IEnumerable<VIEWER> viewers = ViewerBl.GetViewers();
                     this.GuiSync(() =>
                     {
                         dgViewers.ItemsSource = null;
-                        dgViewers.ItemsSource = viewers;
+                        dgViewers.ItemsSource = ViewerBl.GetViewers();
                     });
                 }
                 catch (Exception ex)
@@ -49,7 +48,12 @@ namespace Library.View
 
         private void BtnAddViewer_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            ViewersWindowEditor viwerEditor = new ViewersWindowEditor();
+
+            if (!viwerEditor.ShowDialog().Value)
+                return;
+
+            RefreshViewers();
         }
 
         private void BtnEditViewer_OnClick(object sender, RoutedEventArgs e)

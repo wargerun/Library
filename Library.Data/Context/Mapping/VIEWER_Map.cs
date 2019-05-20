@@ -15,7 +15,7 @@ namespace Library.Data.Context
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .HasPrecision(38, 0);
 
-            Property(d => d.NAME).HasMaxLength(100).IsUnicode(false).IsRequired();
+            Property(d => d.NAME).HasMaxLength(100).IsRequired().IsUnicode(false);
 
             Property(d => d.SURNAME).HasMaxLength(100).IsUnicode(false);
 

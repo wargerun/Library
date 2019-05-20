@@ -14,11 +14,6 @@ namespace Library.Data.Context
             Property(d => d.ID)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .HasPrecision(38, 0);
-
-            // Relationships
-            //HasRequired(b => b.BOOKS_ID)
-            //    .WithMany(b => b.)
-            //    .HasForeignKey(b => b.bo);
         }
     }
 }
