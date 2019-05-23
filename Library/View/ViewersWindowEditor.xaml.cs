@@ -2,8 +2,10 @@
 using NLog;        
 using System;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using Library.Data.BusinessLogic;
+using Library.Helpers;
 
 namespace Library.View
 {
@@ -19,6 +21,8 @@ namespace Library.View
 
         private static Logger _logger = LogManager.GetCurrentClassLogger();
         public VIEWER SelectedViewer { private get; set; }
+
+        public DbManager<VIEWER> manager = new DbManager<VIEWER>(new ManagerViewer(), null);
 
         private void ViewersWindowEditor_OnLoaded(object sender, RoutedEventArgs e)
         {
@@ -58,14 +62,9 @@ namespace Library.View
 
 
             if (!string.IsNullOrWhiteSpace(viewer.EMAIL) && !new[] { "@", "." }.All(v => viewer.EMAIL.Contains(v)))
-                throw new Exception($"Почта {viewer.SURNAME}(a) введена не верно!");
+                throw new Exception($"Почта {viewer.SURNAME} введена не верно!");
 
             return viewer;
-        }
-
-        private void ActionWrapper(Action action)
-        {
-            throw new NotImplementedException();
         }
 
         private void BtnAddedViewer_OnClick(object sender, RoutedEventArgs e)
@@ -75,13 +74,20 @@ namespace Library.View
                 _logger.Info("Getting started: BtnAddedViewer_OnClick");
                 VIEWER viewer = GetWindowFields();
 
-                //TODO дописать обработку всех операций
-                //ActionWrapper(() => ViewerBl.AddNewViewer(viewer));
+                ThreadPool.QueueUserWorkItem(obj => 
+                {
+                    manager.Entity = viewer;
+                    
+                    manager.AddNewRow();
+
+                    if (manager.IsOk)
+                        this.GuiSync(Close);
+                });
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }      
 
@@ -92,12 +98,19 @@ namespace Library.View
                 _logger.Info("Getting started: BtnChangeViewer_OnClick");
                 VIEWER viewer = GetWindowFields();
 
-                //ActionWrapper(() => ViewerBl.AddNewViewer(viewer));
+                ThreadPool.QueueUserWorkItem(obj =>
+                {
+                    manager.Entity = viewer;
+                    manager.UpdateRow();
+
+                    if (manager.IsOk)
+                        this.GuiSync(Close);
+                });
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error); 
             }
         }
 
@@ -108,12 +121,19 @@ namespace Library.View
                 _logger.Info("Getting started: BtnRemoveViewer_OnClick");
                 VIEWER viewer = GetWindowFields();
 
-                //ActionWrapper(() => ViewerBl.AddNewViewer(viewer));
+                ThreadPool.QueueUserWorkItem(obj =>
+                {
+                    manager.Entity = viewer;
+                    manager.RemoveRow();
+
+                    if (manager.IsOk)
+                        this.GuiSync(Close);
+                });
             }
             catch (Exception ex)
             {
                 _logger.Error(ex);
-                MessageBox.Show(ex.ToString(), "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
