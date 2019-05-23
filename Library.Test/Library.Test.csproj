@@ -79,6 +79,7 @@
     <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbOperationsTest\AddedTests.cs" />
     <Compile Include="DbTest\TestDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DbTest\DbBlTests.cs" />
@@ -93,6 +94,10 @@
     <ProjectReference Include="..\Library.Data\Library.Data.csproj">
       <Project>{A6488BAD-CC3D-4532-BA41-33506F864BF3}</Project>
       <Name>Library.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{D052DF38-E98A-4575-8FBC-72ADA06D3E7A}</Project>
+      <Name>Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

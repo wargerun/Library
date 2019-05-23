@@ -48,9 +48,11 @@ namespace Library.View
 
         private void BtnAddViewer_OnClick(object sender, RoutedEventArgs e)
         {
-            ViewersWindowEditor viwerEditor = new ViewersWindowEditor();
+            ViewersWindowEditor viewerEditor = new ViewersWindowEditor();
 
-            if (!viwerEditor.ShowDialog().Value)
+            viewerEditor.ShowDialog();
+
+            if (!viewerEditor.manager.IsOk)
                 return;
 
             RefreshViewers();
@@ -66,7 +68,9 @@ namespace Library.View
                 SelectedViewer = ((VIEWER)dgViewers.SelectedItems[0])
             };
 
-            if (!viewerEditor.ShowDialog().Value)
+            viewerEditor.ShowDialog();
+
+            if (!viewerEditor.manager.IsOk)
                 return;
 
             RefreshViewers();    
