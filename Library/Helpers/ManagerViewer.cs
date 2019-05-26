@@ -4,7 +4,7 @@ using Library.Interfaces;
 
 namespace Library.Helpers
 {
-    public class ManagerViewer : IDbManager<VIEWER>
+    public sealed class ManagerViewer : IDbManager<VIEWER>
     {
         public void AddNewRow(VIEWER viewer)
         {

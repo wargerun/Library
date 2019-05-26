@@ -10,7 +10,6 @@ namespace Library.Data.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "Library.Data.Context.LibraryDb";
         }
 
         protected override void Seed(Library.Data.Context.LibraryDb context)

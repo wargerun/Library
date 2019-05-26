@@ -1,0 +1,52 @@
+﻿<Window x:Class="Library.View.BooksIssuedWindowEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Library.View"
+        mc:Ignorable="d" Loaded="BooksIssuedWindowEditor_OnLoaded"         
+        Title="Редактор" MaxHeight="500" Width="500" Height="270" Background="#FF47230C" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Name="spField" Grid.Row="0" HorizontalAlignment="Center" Grid.ColumnSpan="2" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal" Margin="10,30,10,10">
+                <TextBlock Text="Дата выдачи: "></TextBlock>
+                <TextBlock Text=" *  " Foreground="Red"></TextBlock>
+                <DatePicker Name="dpIssueDate" Width="150" SelectedDateFormat="Long" FirstDayOfWeek="Monday" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Дата возврата: "></TextBlock>
+                <TextBlock Text=" *  " Foreground="Red"></TextBlock>
+                <DatePicker Name="dpReturnDate" Width="150" SelectedDateFormat="Long" FirstDayOfWeek="Monday" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Книга: "></TextBlock>
+                <TextBox Name="txtBooks" Width="150"></TextBox>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Читатель: "></TextBlock>
+                <ComboBox Name="cbVeiwer" 
+                          VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Left" DisplayMemberPath="NAME ISBN ">
+                </ComboBox>
+
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button Visibility="Collapsed" Name="btnAddedBooksIssued" Click="BtnAddedBooksIssued_OnClick" Content="Добавить" Margin="0,0,10,0" ></Button>
+            <Button Visibility="Collapsed" Name="btnChangeBookIssued" Click="BtnChangeBookIssued_OnClick" Content="Изменить"></Button>
+            <Button Visibility="Collapsed" Name="btnRemoveBookIssued" Click="BtnRemoveBookIssued_OnClick" Content="Удалить" Margin="10,0,0,0"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

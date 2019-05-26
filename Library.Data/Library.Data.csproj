@@ -72,14 +72,15 @@
     <Compile Include="BOOK.cs" />
     <Compile Include="BOOKS_ISSUED.cs" />
     <Compile Include="BusinessLogic\BooksBl.cs" />
+    <Compile Include="BusinessLogic\BooksIssuedBl.cs" />
     <Compile Include="BusinessLogic\ViewerBl.cs" />
     <Compile Include="Context\Mapping\BOOKS_ISSUED_Map.cs" />
     <Compile Include="Context\Mapping\BOOKS_Map.cs" />
     <Compile Include="Context\LibraryDb.cs" />
     <Compile Include="Context\Mapping\VIEWER_Map.cs" />
-    <Compile Include="Migrations\201905162043374_InitialCreate.cs" />
-    <Compile Include="Migrations\201905162043374_InitialCreate.Designer.cs">
-      <DependentUpon>201905162043374_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201905261800221_Initial.cs" />
+    <Compile Include="Migrations\201905261800221_Initial.Designer.cs">
+      <DependentUpon>201905261800221_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,8 +94,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201905162043374_InitialCreate.resx">
-      <DependentUpon>201905162043374_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905261800221_Initial.resx">
+      <DependentUpon>201905261800221_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

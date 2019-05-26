@@ -103,12 +103,26 @@
     <Compile Include="Helpers\ManagerBooks.cs" />
     <Compile Include="Helpers\ManagerViewer.cs" />
     <Compile Include="Interfaces\IDbManager.cs" />
+    <Compile Include="View\BooksIssuedWindow.xaml.cs">
+      <DependentUpon>BooksIssuedWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\BooksIssuedWindowEditor.xaml.cs">
+      <DependentUpon>BooksIssuedWindowEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ViewersWindow.xaml.cs">
       <DependentUpon>ViewersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ViewersWindowEditor.xaml.cs">
       <DependentUpon>ViewersWindowEditor.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\BooksIssuedWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\BooksIssuedWindowEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\BooksWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -28,7 +28,9 @@ namespace Library.View
 
         private void BtnShowWindowIssuedBooks_Click(object sender, RoutedEventArgs e)
         {
+            new BooksIssuedWindow().Show();
 
+            Close();
         }
     }
 }

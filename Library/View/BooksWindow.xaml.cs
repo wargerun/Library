@@ -1,9 +1,7 @@
 ﻿using Library.Data;
-using Library.Data.BusinessLogic;   
+using Library.Data.BusinessLogic; 
 using System;
-using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Library.View
