@@ -20,6 +20,41 @@ namespace Library.View
         private void ViewersWindow_OnLoaded(object sender, RoutedEventArgs e)
         {
             RefreshViewers();
+        }   
+
+        private void ViewersWindow_OnClosed(object sender, EventArgs e)
+        {
+            new InitionalWindow().Show();
+        }
+
+        private void BtnAddViewer_OnClick(object sender, RoutedEventArgs e)
+        {
+            ViewersWindowEditor viewerEditor = new ViewersWindowEditor();
+
+            viewerEditor.ShowDialog();
+
+            if (!viewerEditor.Manager.IsOk)
+                return;
+
+            RefreshViewers();
+        }
+
+        private void BtnEditViewer_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (dgViewers.SelectedItem == null)
+                return;
+
+            ViewersWindowEditor viewerEditor = new ViewersWindowEditor
+            {
+                SelectedViewer = ((VIEWER)dgViewers.SelectedItems[0])
+            };
+
+            viewerEditor.ShowDialog();
+
+            if (!viewerEditor.Manager.IsOk)
+                return;
+
+            RefreshViewers();    
         }
 
         private void RefreshViewers()
@@ -40,40 +75,5 @@ namespace Library.View
                 }
             });
         }
-
-        private void ViewersWindow_OnClosed(object sender, EventArgs e)
-        {
-            new InitionalWindow().Show();
-        }
-
-        private void BtnAddViewer_OnClick(object sender, RoutedEventArgs e)
-        {
-            ViewersWindowEditor viewerEditor = new ViewersWindowEditor();
-
-            viewerEditor.ShowDialog();
-
-            if (!viewerEditor.manager.IsOk)
-                return;
-
-            RefreshViewers();
-        }
-
-        private void BtnEditViewer_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (dgViewers.SelectedItem == null)
-                return;
-
-            ViewersWindowEditor viewerEditor = new ViewersWindowEditor
-            {
-                SelectedViewer = ((VIEWER)dgViewers.SelectedItems[0])
-            };
-
-            viewerEditor.ShowDialog();
-
-            if (!viewerEditor.manager.IsOk)
-                return;
-
-            RefreshViewers();    
-        }                  
     }
 }

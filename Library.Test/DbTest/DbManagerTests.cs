@@ -1,15 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Library.Data;
-using Library.Data.BusinessLogic;
 using Library.Data.Context;
 using Library.Helpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Library.Test.DbOperationsTest
+namespace Library.Test.DbTest
 {
     [TestClass]
-    public class TddOperationsTests
+    public class DbManagerTests
     {
         const string someText = "Syka blyat!";
 

@@ -3,6 +3,7 @@ using Library.Data.BusinessLogic;
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Library.View
@@ -27,11 +28,12 @@ namespace Library.View
             RefreshBooks();
         }    
 
-        private void BtnAddbook_Click(object sender, RoutedEventArgs e)
+        private void BtnAddBook_Click(object sender, RoutedEventArgs e)
         {
             BooksWindowEditor bookEditor = new BooksWindowEditor();
 
-            if (!bookEditor.ShowDialog().Value)
+            bookEditor.ShowDialog();
+            if (!bookEditor.Manager.IsOk)
                 return;
 
             RefreshBooks();
@@ -47,10 +49,11 @@ namespace Library.View
                 SelectedBook =((BOOK)dgBooks.SelectedItems[0]) 
             };
 
-            if (!bookEditor.ShowDialog().Value)
+            bookEditor.ShowDialog();
+            if (!bookEditor.Manager.IsOk)
                 return;
 
-            RefreshBooks();     
+            RefreshBooks();
         }
 
         private void RefreshBooks()

@@ -1,9 +1,9 @@
-﻿using NLog; 
-using System;
+﻿using System;
 using System.Data.Entity.Validation;
 using System.Windows;
+using NLog;
 
-namespace Library.Helpers
+namespace Library.Abstract
 {
     public abstract class BaseDbManager
     {
