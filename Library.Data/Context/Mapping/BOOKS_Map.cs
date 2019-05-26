@@ -29,7 +29,7 @@ namespace Library.Data.Context
 
             Property(b => b.DESCRIPTION).IsMaxLength().IsUnicode(false);
 
-            Property(b => b.PRICE).HasPrecision(18, 2).IsRequired();
+            Property(b => b.PRICE).HasPrecision(18, 2).IsRequired(); ;
         }   
     }
 }

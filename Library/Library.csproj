@@ -98,7 +98,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Helpers\BaseDbManager.cs" />
+    <Compile Include="Abstract\BaseDbManager.cs" />
     <Compile Include="Helpers\DbManager.cs" />
     <Compile Include="Helpers\ManagerBooks.cs" />
     <Compile Include="Helpers\ManagerViewer.cs" />

@@ -26,7 +26,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Height="auto" HorizontalAlignment="Center" Margin="5">
-            <Button Margin="5" Name="btnAddbook" Content="Добавить" Click="BtnAddbook_Click"/>
+            <Button Margin="5" Name="btnAddBook" Content="Добавить" Click="BtnAddBook_Click"/>
             <Button Margin="5" Name="btnEditBook" Content="Изменить/Удалить" Click="BtnEditBook_Click"/>
         </StackPanel>
 
